@@ -1,0 +1,77 @@
+import pandas as pd
+import os
+
+class MonitoramentoProducao():
+    def __init__(self):
+        self.caminho_estoque = "database/estoque.csv"
+        self.caminha_receitas_padronizadas = "database/receitas_padronizadas.csv"
+        self.caminho_filial_01 = "database/filial_01"
+        self.caminho_filial_02 = "database/filial_02"
+        self.caminho_filial_03 = "database/filial_03"
+
+        if not os.path.exists(self.caminha_receitas_padronizadas):
+            receitas = pd.DataFrame({'inicializacao': 0})
+            receitas.to_csv(self.caminha_receitas_padronizadas, index = False)
+
+        if not os.path.exists(self.caminho_filial_01):
+            filial = pd.DataFrame({'prato': '',
+                                   'ingrediente': '',
+                                   'preco': 0})
+            filial.to_csv(self.caminho_filial_01, index=False)
+        if not os.path.exists(self.caminho_filial_02):
+            filial = pd.DataFrame({'prato': '',
+                                   'ingrediente': '',
+                                   'preco': 0})
+            filial.to_csv(self.caminho_filial_02, index=False)
+        if not os.path.exists(self.caminho_filial_03):
+            filial = pd.DataFrame({'prato': '',
+                                   'ingrediente': '',
+                                   'preco': 0})
+            filial.to_csv(self.caminho_filial_03, index=False)
+    
+    # busca o arquivo de estoque (não está completo)
+    def monitorar_producao(self):
+        try:
+            estoque = pd.read_csv(self.caminho_estoque)
+        except:
+            estoque = pd.DataFrame()
+        
+        print(estoque.to_csv(index=False))
+
+    # adiciona a receita de um produto se ela não estiver cadastrada (não está completo)
+    def padronizar_receita_instrucao(self, nome_do_prato, instrucoes):
+        try:
+            receitas = pd.read_csv(self.caminha_receitas_padronizadas)
+        except:
+            receitas = pd.DataFrame()
+        
+        # adiciona se o prato não foi cadastrado ainda
+        if receitas.empty or nome_do_prato not in receitas:
+            receitas[nome_do_prato] = instrucoes
+        else:
+            print("O prato já foi cadstrado!")
+        
+        # adiciona o novo prato no arquivo
+        if 'inicializacao' in receitas:
+            receitas.drop('inicializacao')
+            receitas.to_csv(self.caminha_receitas_padronizadas, index = False)
+        else:
+            receitas.to_csv(self.caminha_receitas_padronizadas, index = False, header=False)
+    
+    # adiciona um novo prato ao cardapio (não está completo)
+    def cadastrar_cardapio(self, filial, prato, ingredientes, preco):
+        try:
+            filial = pd.read_csv(f"database/{filial}")
+        except:
+            filial = pd.DataFrame()
+        
+        if filial.empty or prato not in filial:
+            filial['prato'] = [prato]
+            filial['ingradientes'] = ingredientes
+            filial['preco'] - preco
+
+            filial.to_csv(f"database/{filial}", index=False, header=False)
+        
+        else:
+            print("Prato já foi cadastrado!")
+        
