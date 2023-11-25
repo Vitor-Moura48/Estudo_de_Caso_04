@@ -33,7 +33,10 @@ class MonitoramentoProducao():
         except:
             estoque = pd.DataFrame()
         
-        print(estoque.to_csv(index=False))
+        if not estoque.empty:
+            print(estoque.to_csv(index=False))
+        else:
+            print("O estoque está vazio!\n")
 
     # adiciona a receita de um produto se ela não estiver cadastrada
     def padronizar_receita_instrucao(self, nome_do_prato, instrucoes):
@@ -49,23 +52,25 @@ class MonitoramentoProducao():
             # adiciona o novo prato no arquivo
             nova_receita.to_csv(self.caminha_receitas_padronizadas, mode='a', index = False, header=False)
 
+            print("\nPadronizando Receita...\n")
+
         else:
-            print("A receita já foi cadstrada!")    
+            print("\nA receita já foi cadastrada!\n")    
     
     # adiciona um novo prato ao cardapio (não está completo)
     def cadastrar_cardapio(self, filial, prato, ingredientes, preco):
         try:
             cardapio_filial = pd.read_csv(f"database/{filial}.csv")
         except:
-            cardapio_filial = pd.DataFrame()
+            print("\nEssa filial não existe!\n")
+            return 0
         
         if cardapio_filial.empty or prato not in cardapio_filial['prato'].values:
             novo_prato = pd.DataFrame({'prato': [prato], 'ingredientes': [ingredientes], 'preco': [preco]})
             novo_prato.to_csv(f"database/{filial}.csv", mode='a', index=False, header=False)
+
+            print("\nCadastrando Prato...\n")
         
         else:
-            print("Prato já foi cadastrado!")
+            print("\nPrato já foi cadastrado!\n")
         
-teste = MonitoramentoProducao()
-teste.padronizar_receita_instrucao('arroz_picante', 'Misture o 300g de arroz com 4 pimentas, adicione um pouco de sal')
-teste.cadastrar_cardapio('filial_01', 'pastel', 'massa, queijo, oleo', '5')

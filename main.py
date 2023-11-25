@@ -33,7 +33,7 @@ try:
                             (f'1 - Módulo de ', '1'),
                             (f'2 - Módulo de ', '2'),
                             (f'3 - Módulo de ', '3'),
-                            (f'4 - Módulo de ', '4'),
+                            (f'4 - Módulo de Monitoramento e Controle da Produção', '4'),
                             (f'5 - Módulo de ', '5'),
                             (f'6 - Encerrar a Sessão no Sistema', '6')
                         ])
@@ -57,7 +57,8 @@ try:
             case '3':
                 pass
             case '4':
-                pass
+                from controller.monitoramento_producao_controller import run
+                run()
             case '5':
                 pass
             case '6':
