@@ -4,6 +4,7 @@ import os
 class ControleEstoque():
     def __init__(self):
         self.controle_estoque = 'controle_estoque.csv'
+        self.avisos = 'avisos.txt'
 
         if os.path.isfile(self.controle_estoque):
             # Se o arquivo existir, carregue o DataFrame do arquivo CSV
@@ -11,9 +12,9 @@ class ControleEstoque():
         else:
             # Se o arquivo não existir, crie um DataFrame inicial com todas as filiais e quantidades zeradas
             filiais = [
-                {'Filial': 'Filial 1', 'Alimentos': 26, 'Bebidas': 50, 'Enxoval': 65, 'Utensilios': 20, 'Equipamentos': 18, 'Energetico': 10},
-                {'Filial': 'Filial 2', 'Alimentos': 27, 'Bebidas': 16, 'Enxoval': 23, 'Utensilios': 46, 'Equipamentos': 13, 'Energetico': 12},
-                {'Filial': 'Filial 3', 'Alimentos': 17, 'Bebidas': 18, 'Enxoval': 20, 'Utensilios': 21, 'Equipamentos': 23, 'Energetico': 6}
+                {'Filial': 'Filial 1', 'Alimentos': 26, 'Bebidas': 50,'Utensilios': 12, 'Uniforme':12,'Equipamentos': 18, 'Energetico': 10},
+                {'Filial': 'Filial 2', 'Alimentos': 27, 'Bebidas': 16,'Utensilios': 12, 'Uniforme':12,'Equipamentos': 13, 'Energetico': 12},
+                {'Filial': 'Filial 3', 'Alimentos': 17, 'Bebidas': 18,'Utensilios': 12, 'Uniforme':12,'Equipamentos': 23, 'Energetico': 6}
             ]
             self.df = pd.DataFrame(filiais)
             
@@ -23,8 +24,8 @@ class ControleEstoque():
         print(f'{self.df}\n')
 
         filial = input('-Filial 1\n-Filial 2\n-Filial 3\nQual a Filial deseja atualizar? ')
-
-        coluna = input('\n-Alimentos\n-Bebidas\n-Enxoval\n-Utensilios\n-Equipamentos\n-Energetico\nQual o tipo de produto? ')
+        
+        coluna = input('\n-Alimentos\n-Bebidas\n-Utensilios\n-Uniforme\n-Equipamentos\n-Energetico\nQual o tipo de produto? ')
 
         quantidade = int(input('Qual a quantidade que deseja retirar? '))
         
@@ -37,7 +38,12 @@ class ControleEstoque():
         estoque_atualizado = self.df.loc[self.df['Filial'] == filial, coluna].values[0]
         if estoque_atualizado < 5:
             print(f'AVISO: O estoque de {coluna} na {filial} está abaixo do limite de 5 unidades!')
-            
+            try:
+                with open(self.avisos,'a',newline='') as arquivo:
+                    arquivo.write(f'{filial}:{coluna} - {estoque_atualizado}\n')
+            except FileNotFoundError:
+                print(f"Ocorreu um erro: Não encontrado")
+
         self.df.to_csv(self.controle_estoque, index=False)
 
 # Criar uma instância da classe ControleEstoque
