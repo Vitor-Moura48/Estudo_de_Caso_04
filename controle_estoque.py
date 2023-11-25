@@ -4,7 +4,7 @@ import os
 class ControleEstoque():
     def __init__(self):
         self.controle_estoque = 'controle_estoque.csv'
-        self.avisos = 'avisos.txt'
+        self.avisos = 'avisos.csv'
 
         if os.path.isfile(self.controle_estoque):
             # Se o arquivo existir, carregue o DataFrame do arquivo CSV
@@ -19,6 +19,14 @@ class ControleEstoque():
             self.df = pd.DataFrame(filiais)
             
             self.df.to_csv(self.controle_estoque, index=False)
+
+        if os.path.isfile(self.avisos):
+            self.df2 = pd.read_csv(self.avisos)
+            
+        else:
+            self.df2 = pd.DataFrame(columns=['Filial', 'Categoria'])
+            
+            self.df2.to_csv(self.avisos, index=False)
 
     def diminuir_estoque(self):
         print(f'{self.df}\n')
@@ -36,13 +44,12 @@ class ControleEstoque():
 
         # Verificando se o estoque está abaixo do limite:
         estoque_atualizado = self.df.loc[self.df['Filial'] == filial, coluna].values[0]
+
         if estoque_atualizado < 5:
             print(f'AVISO: O estoque de {coluna} na {filial} está abaixo do limite de 5 unidades!')
-            try:
-                with open(self.avisos,'a',newline='') as arquivo:
-                    arquivo.write(f'{filial}:{coluna} - {estoque_atualizado}\n')
-            except FileNotFoundError:
-                print(f"Ocorreu um erro: Não encontrado")
+            aviso = {'Filial': filial, 'Categoria': coluna}
+            self.df2 = pd.concat([self.df2, pd.DataFrame([aviso])], ignore_index=True)
+            self.df2.to_csv(self.avisos, index=False)
 
         self.df.to_csv(self.controle_estoque, index=False)
 
