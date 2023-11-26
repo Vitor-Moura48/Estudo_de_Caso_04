@@ -47,7 +47,7 @@ class ControleEstoque():
 
         if estoque_atualizado < 5:
             print(f'AVISO: O estoque de {coluna} na {filial} está abaixo do limite de 5 unidades!')
-            aviso = {'Filial': filial, 'Categoria': coluna}
+            aviso = {'Filial': filial, 'Categoria': coluna, 'Quantidade': estoque_atualizado}
             self.df2 = pd.concat([self.df2, pd.DataFrame([aviso])], ignore_index=True)
             self.df2.to_csv(self.avisos, index=False)
 
