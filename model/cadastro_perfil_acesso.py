@@ -11,8 +11,8 @@ class CadastrarPerfilAcesso:
 
     def criar_perfil_acesso(self):
         perguntas = [
-            inquirer.Text('nome', message='Nome do perfil de acesso:'),
-            inquirer.List('areas_acesso', message='Áreas de acesso:', choices=['Cadastro de Produtos', 'Controle de Estoque']),
+            inquirer.Text('nome', message='Nome do perfil de acesso'),
+            inquirer.List('areas_acesso', message='Áreas de acesso', choices=['Cadastro de Produtos', 'Controle de Estoque']),
         ]
         respostas = inquirer.prompt(perguntas)
 
@@ -26,10 +26,10 @@ class CadastrarPerfilAcesso:
 
     def cadastrar_produto(self):
         questions = [
-            inquirer.Text('nome', message='Nome do produto:'),
-            inquirer.Text('tipo', message='Tipo do produto:'),
-            inquirer.Text('quantidade', message='Quantidade do produto:'),
-            inquirer.Text('preco', message='Preço do produto:'),
+            inquirer.Text('nome', message='Nome do produto'),
+            inquirer.Text('tipo', message='Tipo do produto'),
+            inquirer.Text('quantidade', message='Quantidade do produto'),
+            inquirer.Text('preco', message='Preço do produto'),
         ]
 
         answers = inquirer.prompt(questions)
@@ -41,14 +41,14 @@ class CadastrarPerfilAcesso:
         }])
         self.dados['produtos'] = pd.concat([self.dados['produtos'], produto], ignore_index=True)
 
-        print('Produto cadastrado com sucesso.')
+        print('\nProduto cadastrado com sucesso.\n')
 
     def adicionar_produto_estoque(self):
         questions = [
-            inquirer.Text('nome_produto', message='Nome do produto:'),
-            inquirer.Text('tipo_produto', message='Tipo do produto:'),
-            inquirer.Text('quantidade_produto', message='Quantidade do produto:'),
-            inquirer.Text('preco_produto', message='Preço do produto:'),
+            inquirer.Text('nome_produto', message='Nome do produto'),
+            inquirer.Text('tipo_produto', message='Tipo do produto'),
+            inquirer.Text('quantidade_produto', message='Quantidade do produto'),
+            inquirer.Text('preco_produto', message='Preço do produto'),
         ]
 
         answers = inquirer.prompt(questions)
@@ -60,18 +60,18 @@ class CadastrarPerfilAcesso:
         }])
         self.dados['estoque'] = pd.concat([self.dados['estoque'], produto], ignore_index=True)
 
-        print('Produto adicionado ao estoque com sucesso.')
+        print('\nProduto adicionado ao estoque com sucesso.\n')
 
     def salvar_dados_csv(self):
         for nome, df in self.dados.items():
             df.to_csv(f'database/{nome}.csv', index=False, mode='a', header=False)
 
-        print('Dados salvos em CSV com sucesso.')
+        print('\nDados salvos em CSV com sucesso.\n')
 
     def menu_principal(self):
         while True:
             opcoes = [
-                inquirer.List('opcao', message='Escolha uma opção:', choices=['Criar Perfil de Acesso', 'Cadastrar Produto', 'Adicionar Produto ao Estoque', 'Salvar e Sair']),
+                inquirer.List('opcao', message='Escolha uma opção', choices=['Criar Perfil de Acesso', 'Cadastrar Produto', 'Adicionar Produto ao Estoque', 'Salvar e Sair']),
             ]
 
             escolha = inquirer.prompt(opcoes)['opcao']
