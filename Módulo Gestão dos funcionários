@@ -1,0 +1,172 @@
+26/11/2023.
+
+
+
+                                 #Gestão De Funcionários
+
+
+######################################################################################
+
+#    RF01  e RF04
+
+# Filial  - 01
+# Visualizar equipe:
+# Escalas de trabalho:
+# Registrar hora:
+# Avaliar desempenho:
+
+def gerenciar_equipe():
+    print('Filial 1\n', 'Filial 2\n' , 'Filial 3')
+    numero_da_filial = int(input('Selecione a filial:'))
+    # primeiro selecionar a filial
+
+
+    if (numero_da_filial == 1): # Filial 1
+
+        # Dados da equipe
+        f1_dados_equipe = {
+            'id': [1, 2, 3, 4, 5],
+            'cargo': ['Chefe', 'Cozinheor', 'Gerente', 'Garçon', 'Caixa'],
+            'nome': ['João', 'Maria', 'Carlos', 'Ana', 'Pedro'],
+            'carga_horaria': [40, 35, 40, 30, 35],
+            'avaliacao_individual': [4.5, 3.8, 4.9, 4.2, 3.5]
+        }
+
+        # Criar DataFrame com os dados da equipe
+        f1_equipe_df = pd.DataFrame(dados_equipe)
+
+        # Exibir a tabela
+        print(f1_equipe_df)import pandas as pd
+
+        # Dados da equipe
+        f1_dados_equipe = {
+            'id': [1, 2, 3, 4, 5],
+            'cargo': ['Desenvolvedor', 'Designer', 'Gerente', 'Analista', 'Testador'],
+            'nome': ['João', 'Maria', 'Carlos', 'Ana', 'Pedro'],
+            'carga_horaria': [40, 35, 40, 30, 35],
+            'avaliacao_individual': [4.5, 3.8, 4.9, 4.2, 3.5]
+        }
+
+        # Criar DataFrame com os dados da equipe
+        f1_equipe_df = pd.DataFrame(dados_equipe)
+
+        # Exibir a tabela
+        print(f1_equipe_df)
+
+    ####################################################################################################################
+
+    elif (numero_da_filial == 2): # Filial 2
+
+        # Dados da equipe
+        f2_dados_equipe = {
+            'id': [1, 2, 3, 4, 5],
+            'cargo': ['Chefe', 'Cozinheor', 'Gerente', 'Garçon', 'Caixa'],
+            'nome': ['João', 'Maria', 'Carlos', 'Ana', 'Pedro'],
+            'carga_horaria': [40, 35, 40, 30, 35],
+            'avaliacao_individual': [4.5, 3.8, 4.9, 4.2, 3.5]
+        }
+
+        # Criar DataFrame com os dados da equipe
+        f2_equipe_df = pd.DataFrame(dados_equipe)
+
+        # Exibir a tabela
+        print(f2_equipe_df)import pandas as pd
+
+        # Dados da equipe
+        f2_dados_equipe = {
+            'id': [1, 2, 3, 4, 5],
+            'cargo': ['Desenvolvedor', 'Designer', 'Gerente', 'Analista', 'Testador'],
+            'nome': ['João', 'Maria', 'Carlos', 'Ana', 'Pedro'],
+            'carga_horaria': [40, 35, 40, 30, 35],
+            'avaliacao_individual': [4.5, 3.8, 4.9, 4.2, 3.5]
+        }
+
+        # Criar DataFrame com os dados da equipe
+        f2_equipe_df = pd.DataFrame(dados_equipe)
+
+        # Exibir a tabela
+        print(f2_equipe_df)
+
+    #################################################################################
+
+
+    elif (numero_da_filial == 3): # Filial 3
+
+        # Dados da equipe
+        f3_dados_equipe = {
+            'id': [1, 2, 3, 4, 5],
+            'cargo': ['Chefe', 'Cozinheor', 'Gerente', 'Garçon', 'Caixa'],
+            'nome': ['João', 'Maria', 'Carlos', 'Ana', 'Pedro'],
+            'carga_horaria': [40, 35, 40, 30, 35],
+            'avaliacao_individual': [4.5, 3.8, 4.9, 4.2, 3.5]
+        }
+
+        # Criar DataFrame com os dados da equipe
+        f3_equipe_df = pd.DataFrame(dados_equipe)
+
+        # Exibir a tabela
+        print(f2_equipe_df)import pandas as pd
+
+        # Dados da equipe
+        f3_dados_equipe = {
+            'id': [1, 2, 3, 4, 5],
+            'cargo': ['Desenvolvedor', 'Designer', 'Gerente', 'Analista', 'Testador'],
+            'nome': ['João', 'Maria', 'Carlos', 'Ana', 'Pedro'],
+            'carga_horaria': [40, 35, 40, 30, 35],
+            'avaliacao_individual': [4.5, 3.8, 4.9, 4.2, 3.5]
+        }
+
+        # Criar DataFrame com os dados da equipe
+        f3_equipe_df = pd.DataFrame(dados_equipe)
+
+        # Exibir a tabela
+        print(f3_equipe_df)
+
+
+    #############################################################################################
+#                                         ok +-              falta a função para fazer as alterações:
+
+#                      - marcar ponto - alterar carga horária - alterar cargo - avaliar funcionário - avaliar equipe
+
+
+
+        # Escala de trabalho: 
+
+        #      Turno: manhã ?
+
+        #  ID      Cargo      Nome        Carga Horária(D)    Ava individual
+        # 8u89      Chef     Carlos            8H              0 ~ 10
+        # Produção:
+        # Avaliação da equipe: (Media dos membros da equipe)
+        # Avaliação do Gerente:
+        
+        # Deseja fazer alguma modificação?
+
+        # Se for na nota do funcionário
+        # Se for no cargo
+        # Se for na carga horária
+
+######################################################################################
+
+
+#    RF02
+# Chat de conversa entre filiais e base logistica:
+
+
+
+
+
+
+######################################################################################
+#                                       ok
+
+#    RF03
+# Visualizar os dados de cada funcionário
+# Cargo dos funcionários
+# Histórico profissional de cada funcionário
+
+# Deseja alteral algum dado?
+
+
+######################################################################################
+
