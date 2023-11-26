@@ -3,8 +3,8 @@ import os
 
 class ControleEstoque():
     def __init__(self):
-        self.controle_estoque = 'controle_estoque.csv'
-        self.avisos = 'avisos.csv'
+        self.controle_estoque = 'database/controle_estoque.csv'
+        self.avisos = 'database/avisos.csv'
 
         if os.path.isfile(self.controle_estoque):
             # Se o arquivo existir, carregue o DataFrame do arquivo CSV
