@@ -1,9 +1,13 @@
 import pandas as pd
 import os
+from colorama import init, Fore, Style
+
+init()
+cor_mensagem_erro = Fore.RED
+cor_mensagem_ok = Fore.GREEN
 
 class MonitoramentoProducao():
     def __init__(self):
-        self.caminho_estoque = "database/estoque.csv"
         self.caminha_receitas_padronizadas = "database/receitas_padronizadas.csv"
         self.caminho_filial_01 = "database/filial_01.csv"
         self.caminho_filial_02 = "database/filial_02.csv"
@@ -29,14 +33,14 @@ class MonitoramentoProducao():
     # busca o arquivo de estoque (não está completo)
     def monitorar_producao(self):
         try:
-            estoque = pd.read_csv(self.caminho_estoque)
+            estoque = pd.read_csv("databese/controle_estoque.csv")
         except:
             estoque = pd.DataFrame()
         
         if not estoque.empty:
             print(estoque.to_csv(index=False))
         else:
-            print("O estoque está vazio!\n")
+            print(f"{cor_mensagem_erro}O estoque está vazio!{Style.RESET_ALL}\n")
 
     # adiciona a receita de um produto se ela não estiver cadastrada
     def padronizar_receita_instrucao(self, nome_do_prato, instrucoes):
@@ -52,25 +56,25 @@ class MonitoramentoProducao():
             # adiciona o novo prato no arquivo
             nova_receita.to_csv(self.caminha_receitas_padronizadas, mode='a', index = False, header=False)
 
-            print("\nPadronizando Receita...\n")
+            print(f"\n{cor_mensagem_ok}Padronizando Receita...{Style.RESET_ALL}\n")
 
         else:
-            print("\nA receita já foi cadastrada!\n")    
+            print(f"\n{cor_mensagem_erro}A receita já foi cadastrada!{Style.RESET_ALL}\n")    
     
     # adiciona um novo prato ao cardapio (não está completo)
     def cadastrar_cardapio(self, filial, prato, ingredientes, preco):
         try:
             cardapio_filial = pd.read_csv(f"database/{filial}.csv")
         except:
-            print("\nEssa filial não existe!\n")
+            print(f"\n{cor_mensagem_erro}Essa filial não existe!{Style.RESET_ALL}\n")
             return 0
         
         if cardapio_filial.empty or prato not in cardapio_filial['prato'].values:
             novo_prato = pd.DataFrame({'prato': [prato], 'ingredientes': [ingredientes], 'preco': [preco]})
             novo_prato.to_csv(f"database/{filial}.csv", mode='a', index=False, header=False)
 
-            print("\nCadastrando Prato...\n")
+            print(f"\n{cor_mensagem_ok}Cadastrando Prato...{Style.RESET_ALL}\n")
         
         else:
-            print("\nPrato já foi cadastrado!\n")
+            print(f"{cor_mensagem_erro}Prato já foi cadastrado!{Style.RESET_ALL}\n")
         

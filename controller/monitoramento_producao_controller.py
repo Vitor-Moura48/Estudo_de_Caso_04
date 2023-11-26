@@ -63,5 +63,5 @@ def run():
             monitoramento_producao.cadastrar_cardapio(filial, prato, insgredientes, preco)
         
         elif opcao == '4':
-            print('Saindo do módulo de monitoramento de produção...')
+            print(f'{cor_mensagem_ok}Saindo do módulo de monitoramento de produção...{Style.RESET_ALL}')
             break
