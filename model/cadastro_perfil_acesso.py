@@ -10,15 +10,18 @@ class CadastrarPerfilAcesso:
         }
 
     def criar_perfil_acesso(self):
-        questions = [
+        perguntas = [
             inquirer.Text('nome', message='Nome do perfil de acesso:'),
-            inquirer.Checkbox('areas_acesso', message='Áreas de acesso:', choices=['Cadastro de Produtos', 'Controle de Estoque']),
+            inquirer.List('areas_acesso', message='Áreas de acesso:', choices=['Cadastro de Produtos', 'Controle de Estoque']),
         ]
+        respostas = inquirer.prompt(perguntas)
 
-        answers = inquirer.prompt(questions)
-        perfil = pd.DataFrame([{'nome': answers['nome'], 'areas_acesso': ', '.join(answers['areas_acesso'])}])
+        nome = respostas['nome']
+        areas_acesso = respostas['areas_acesso']
+        perfil = pd.DataFrame({'nome': [nome], 'areas_acesso': [areas_acesso]})
+
         self.dados['perfis_acesso'] = pd.concat([self.dados['perfis_acesso'], perfil], ignore_index=True)
-
+        
         print('Perfil de acesso criado com sucesso.')
 
     def cadastrar_produto(self):
@@ -61,7 +64,7 @@ class CadastrarPerfilAcesso:
 
     def salvar_dados_csv(self):
         for nome, df in self.dados.items():
-            df.to_csv(f'database/{nome}.csv', index=False)
+            df.to_csv(f'database/{nome}.csv', index=False, mode='a', header=False)
 
         print('Dados salvos em CSV com sucesso.')
 
