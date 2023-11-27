@@ -33,7 +33,7 @@ class MonitoramentoProducao():
     # busca o arquivo de estoque (não está completo)
     def monitorar_producao(self):
         try:
-            estoque = pd.read_csv("databese/controle_estoque.csv")
+            estoque = pd.read_csv("database/controle_estoque.csv")
         except:
             estoque = pd.DataFrame()
         
@@ -76,5 +76,5 @@ class MonitoramentoProducao():
             print(f"\n{cor_mensagem_ok}Cadastrando Prato...{Style.RESET_ALL}\n")
         
         else:
-            print(f"{cor_mensagem_erro}Prato já foi cadastrado!{Style.RESET_ALL}\n")
+            print(f"\n{cor_mensagem_erro}Prato já foi cadastrado!{Style.RESET_ALL}\n")
         

@@ -87,7 +87,8 @@ try:
                 from controller.controller_pedidos_fornecedores import run
                 run()
             case '6':
-                pass
+                from model.relatorio_gerencial import RelatorioGerencial
+                relatorio = RelatorioGerencial()
             case '7':
                 print(f'{cor_mensagem}👋 Até mais!{Style.RESET_ALL}\n')
                 break
