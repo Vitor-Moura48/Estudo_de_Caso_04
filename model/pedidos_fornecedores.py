@@ -15,7 +15,7 @@ class Fornecedores:
         else:
             with open('database/pedidos_fornecedores.csv', 'a', newline='') as arquivo:
                 escritor = csv.writer(arquivo)
-                escritor.writerow(['Filial', 'Categoria', 'Quantidade para pedir'])
+                escritor.writerow(['Filial', 'Categoria', 'Quantidade_para_pedir'])
 
         if os.path.isfile('database/fornecedores.csv'):
             with open('database/pedidos_fornecedores.csv', 'a', newline='') as arquivo:
@@ -75,7 +75,8 @@ class Fornecedores:
     def ler_fornecedores_cadastrados(self):
         with open("database/fornecedores.csv", "r",newline='') as arquivo_fornecedores:
             leitor = csv.reader(arquivo_fornecedores)
-            print(leitor)
+            for pedido in leitor:
+                print(pedido)
     
     # PEDIDOS
     def ler_controle_estoque(self):
@@ -97,6 +98,13 @@ class Fornecedores:
         with open("database/pedidos_fornecedores.csv", 'a', newline='') as arquivo_pedidos:
             escritor = csv.writer(arquivo_pedidos)
             escritor.writerows(pedidos)
+        
+        # Após escrever os pedidos, ele apaga o conteúdo do arquivo avisos.csv:
+        with open("database/avisos.csv", 'r') as arquivo_avisos:
+            linhas = arquivo_avisos.readlines()
+        # Manter o cabeçalho e apagar os registros abaixo dele no arquivo avisos.csv:
+        with open("database/avisos.csv", 'w', newline='') as arquivo_avisos:
+            arquivo_avisos.write(linhas[0]) 
 
         # Email para avisar o gerente sobre a necessidade de reabastecimento
         self.enviar_email_gerente()
@@ -123,6 +131,3 @@ class Fornecedores:
         s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
     
 
-gereciamento = Fornecedores()
-gereciamento.cadastro_fornecedores()
-gereciamento.gerar_pedidos_automaticos()

@@ -51,12 +51,13 @@ try:
             inquirer.List('opcao',
                         message=f'Selecione o módulo que deseja acessar',
                         choices=[
-                            (f'1 - Módulo de ', '1'),
+                            (f'1 - Módulo de Controle de Estoque', '1'),
                             (f'2 - Módulo de Cadastro de Perfil de Acesso', '2'),
-                            (f'3 - Módulo de ', '3'),
+                            (f'3 - Módulo de Gestão de Funcionários', '3'),
                             (f'4 - Módulo de Monitoramento e Controle da Produção', '4'),
-                            (f'5 - Módulo de ', '5'),
-                            (f'6 - Encerrar a Sessão no Sistema', '6')
+                            (f'5 - Módulo de Pedidos a Fornecedores', '5'),
+                            (f'6 - Relatório Gerenciais', '6'),
+                            (f'7 - Encerrar a Sessão no Sistema', '7')
                         ])
         ]
 
@@ -72,7 +73,8 @@ try:
 
         match opcao:
             case '1':
-                pass
+                from controller.controller_controle_estoque import run
+                run()
             case '2':
                 sistema = CadastrarPerfilAcesso()
                 sistema.menu_principal()
@@ -82,8 +84,11 @@ try:
                 from controller.monitoramento_producao_controller import run
                 run()
             case '5':
-                pass
+                from controller.controller_pedidos_fornecedores import run
+                run()
             case '6':
+                pass
+            case '7':
                 print(f'{cor_mensagem}👋 Até mais!{Style.RESET_ALL}\n')
                 break
             case _:

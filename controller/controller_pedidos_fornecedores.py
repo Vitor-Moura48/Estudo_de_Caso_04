@@ -3,7 +3,9 @@ from model.pedidos_fornecedores import Fornecedores
 
 fornecedores = Fornecedores()
 
-perguntas = [
+def run():
+   while True:
+    perguntas = [
         inquirer.List('opcao',
                       message="Escolha uma opção",
                       choices=[
@@ -11,11 +13,9 @@ perguntas = [
                             ('2 - Listar Fornecedores', '2'),
                             ('3 - Gerar Pedidos', '3'),
                             ('4 - Sair', '4')
-                      ]
-                      )
-]
+                      ])]
 
-while True:
+    
     respostas = inquirer.prompt(perguntas)
 
     opcao = respostas['opcao']
@@ -29,4 +29,6 @@ while True:
     elif opcao == '4':
         break
     else:
-        print("Opção inválida. Tente novamente.")
+        print("Opção inválida. Tente novamente.") 
+
+
