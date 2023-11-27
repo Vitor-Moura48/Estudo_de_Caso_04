@@ -59,13 +59,9 @@ class Fornecedores:
 
             if resp_gerente == "N":
                 break
-        
-        print("Lista dos fornecedores cadastrados")
-        print(self.fornecedores)
             
         self.salvar_fornecedores()
         
-    
     def salvar_fornecedores(self):     
         with open("database/fornecedores.csv", 'a',newline='') as arquivo_fornecedores:
             escritor =  csv.writer(arquivo_fornecedores)
@@ -73,10 +69,12 @@ class Fornecedores:
                 escritor.writerow([nome, categoria])
 
     def ler_fornecedores_cadastrados(self):
+        print("-=-=-=-= LISTA DE FORNECEDORES =-=-=-=-")
         with open("database/fornecedores.csv", "r",newline='') as arquivo_fornecedores:
             leitor = csv.reader(arquivo_fornecedores)
-            for pedido in leitor:
-                print(pedido)
+            next(leitor)
+            for nome, categoria in leitor:
+                print(f"Nome: {nome}\nCategoria: {categoria}\n")
     
     # PEDIDOS
     def ler_controle_estoque(self):
@@ -111,15 +109,16 @@ class Fornecedores:
         print("Alerta enviado ao gerente.")
     
     def enviar_email_gerente(self):
+        #Conteúdo da mensagem
         corpo_email = """
-        <p>Olá Gerente</p>
+        <p>Olá Gerente</p>                              
         <p>Veja os pedidos de reabastecimento! </p>
         """
 
         msg = email.message.Message()
         msg['Subject'] = 'Necessidade de reabastecimento'
         msg['From'] = 'senhorremetente@gmail.com'
-        msg['To'] = 'senhorremetente@gmail.com'
+        msg['To'] = 'senhorremetente@gmail.com' #Possível email do gerente
         password = 'dbwzmonbmmwabrcz'
         msg.add_header('Content-Type','text/html')
         msg.set_payload(corpo_email)
@@ -129,5 +128,3 @@ class Fornecedores:
         #login
         s.login(msg['From'], password)
         s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
-    
-
