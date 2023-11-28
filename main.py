@@ -79,7 +79,7 @@ try:
                 sistema = CadastrarPerfilAcesso()
                 sistema.menu_principal()
             case '3':
-                pass
+                from model.gestao_funcionarios import *
             case '4':
                 from controller.monitoramento_producao_controller import run
                 run()
